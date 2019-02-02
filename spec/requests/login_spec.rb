@@ -12,10 +12,11 @@ RSpec.describe 'Login API', type: :request do
       end
 
       it 'redirects to Spotify authorization section' do
+        byebug
         query_params = {
-          client_id: ENV['CLIENT_ID'],
+          client_id: Figaro.env.client_id,
           response_type: 'code',
-          redirect_uri: ENV['REDIRECT_URI'],
+          redirect_uri: Figaro.env.redirect_uri,
           scope: 'user-follow-read',
           show_dialog: true
         }
