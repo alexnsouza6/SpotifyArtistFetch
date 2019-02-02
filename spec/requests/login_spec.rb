@@ -12,7 +12,6 @@ RSpec.describe 'Login API', type: :request do
       end
 
       it 'redirects to Spotify authorization section' do
-        byebug
         query_params = {
           client_id: Figaro.env.client_id,
           response_type: 'code',
