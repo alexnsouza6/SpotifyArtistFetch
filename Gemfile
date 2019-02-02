@@ -15,7 +15,8 @@ gem 'puma', '~> 3.11'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+# Use Ruby Methods for query Spotify's Data
+gem 'rspotify'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -25,12 +26,27 @@ gem 'puma', '~> 3.11'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# Simple Rails app configuration
+gem 'figaro'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
+
+# Makes http fun again!
+gem 'httparty'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # RSpec for Rails-3+
+  gem 'rspec-rails', '~> 3.8'
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  # Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests.
+  gem 'vcr', '~> 3.0', '>= 3.0.3'
+  # WebMock allows stubbing HTTP requests and setting expectations on HTTP requests.
+  gem 'webmock', '~> 2.1'
+  # 
+  gem 'rails-controller-testing'
 end
 
 group :development do
