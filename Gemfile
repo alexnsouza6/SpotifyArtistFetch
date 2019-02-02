@@ -38,6 +38,12 @@ group :development, :test do
   # RSpec for Rails-3+
   gem 'rspec-rails', '~> 3.8'
   gem 'shoulda-matchers', '~> 3.0', require: false
+  # Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests.
+  gem 'vcr', '~> 3.0', '>= 3.0.3'
+  # WebMock allows stubbing HTTP requests and setting expectations on HTTP requests.
+  gem 'webmock', '~> 2.1'
+  # 
+  gem 'rails-controller-testing'
 end
 
 group :development do
