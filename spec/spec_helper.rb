@@ -16,6 +16,7 @@
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 RSpec.configure do |config|
+  config.default_formatter = "doc"
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -31,11 +32,15 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
+    stub_request(:get, 'https://accounts.spotify.com/authorize/').
+      to_return(status: 200)
+
     stub_request(:get, 'https://api.spotify.com/v1/me').
       to_return(status: 200, body: { display_name: 'Alex',
                                      external_urls: { spotify_url: 'www.com/brasilia' },
                                      href: 'www.com/brasilia',
                                      uri: 'www.com/brasilia' }.to_json)
+
     stub_request(:post, 'https://accounts.spotify.com/api/token').
       to_return(status: 200, body: { access_token: '123', refresh_token: '321' }.to_json )
   end
