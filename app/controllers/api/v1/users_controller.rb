@@ -39,7 +39,7 @@ class Api::V1::UsersController < ApplicationController
         client_secret: ENV['CLIENT_SECRET']
       }
 
-      auth_response = RestClient.post('https://accounts.spotify.com/api/token', body)
+      RestClient.post('https://accounts.spotify.com/api/token', body)
   end
 
   def user_credentials(auth_params)
@@ -47,6 +47,6 @@ class Api::V1::UsersController < ApplicationController
       Authorization: "Bearer #{auth_params['access_token']}"
     }
 
-    user_response = RestClient.get('https://api.spotify.com/v1/me', header)
+    RestClient.get('https://api.spotify.com/v1/me', header)
   end
 end
