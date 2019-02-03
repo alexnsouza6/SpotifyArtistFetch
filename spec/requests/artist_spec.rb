@@ -12,6 +12,11 @@ RSpec.describe 'Artist API', type: :request do
       it 'returns http status 200' do
         expect(response).to have_http_status(200)
       end
+
+      it 'renders an artist collection' do
+        artists = JSON.parse(response.body)
+        expect(artists.length).to be > 0
+      end
     end
   end
 end
