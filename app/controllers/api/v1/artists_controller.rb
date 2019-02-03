@@ -1,8 +1,8 @@
 class Api::V1::ArtistsController < ApplicationController
   def fetch
-    @user = User.find_by(username: artists_params['name'])
+    user = User.find_by(username: artists_params['name'])
     header = {
-      Authorization: "Bearer #{@user.access_token}"
+      Authorization: "Bearer #{user.access_token}"
     }
 
     artists_response = RestClient.get("https://api.spotify.com/v1/me/following?type=artist", header)
@@ -11,7 +11,7 @@ class Api::V1::ArtistsController < ApplicationController
 
     @artists = artists_params['artists']['items']
 
-    create_artists(@artists,@user)
+    create_artists(@artists, user)
 
     render json: @artists, status: 200
   end
