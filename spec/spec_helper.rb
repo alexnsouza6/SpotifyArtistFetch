@@ -32,6 +32,27 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
+    stub_request(:get, 'https://api.spotify.com/v1/me/following?type=artist').
+      to_return(status: 200, body: { artists: { items: [{ name: 'Kendrick',
+                                                         external_urls: { spotify: 'SomeURL'},
+                                                         href: 'SomeHREF',
+                                                         uri: 'SomeURI',
+                                                         genres: ['Rap'],
+                                                         popularity: 80,
+                                                         images: [url:'SomeImageURL']
+                                                        },
+                                                        {
+                                                         name: 'Lamar',
+                                                         external_urls: { spotify: 'SomeURL'},
+                                                         href: 'SomeHREF',
+                                                         uri: 'SomeURI',
+                                                         genres: ['Rap'],
+                                                         popularity: 80,
+                                                         images: [url:'SomeImageURL']
+                                                        } ]
+                                                }
+                                    }.to_json)
+
     stub_request(:get, 'https://accounts.spotify.com/authorize/').
       to_return(status: 200)
 
