@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::ArtistsController < ApplicationController
   def fetch
     user = User.find_by(username: artists_params['name'])
@@ -5,7 +7,7 @@ class Api::V1::ArtistsController < ApplicationController
       Authorization: "Bearer #{user.access_token}"
     }
 
-    artists_response = RestClient.get("https://api.spotify.com/v1/me/following?type=artist", header)
+    artists_response = RestClient.get('https://api.spotify.com/v1/me/following?type=artist', header)
 
     artists_params = JSON.parse(artists_response)
 
@@ -16,7 +18,7 @@ class Api::V1::ArtistsController < ApplicationController
     render json: @artists, status: 200
   end
 
-  def create_artists(artists,user)
+  def create_artists(artists, user)
     artists.each do |artist|
       artist = Artist.find_or_create_by(name: artist['name'],
                                         spotify_url: artist['external_urls']['spotify'],
@@ -31,6 +33,7 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   protected
+
   def artists_params
     params.permit(:name)
   end

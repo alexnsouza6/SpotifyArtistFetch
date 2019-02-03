@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::UsersController < ApplicationController
   def create
     if params[:error]
@@ -12,8 +14,7 @@ class Api::V1::UsersController < ApplicationController
       @user = User.find_or_create_by(username: user_params['display_name'],
                                      spotify_url: user_params['external_urls']['spotify'],
                                      href: user_params['href'],
-                                     uri: user_params['uri']
-                                    )
+                                     uri: user_params['uri'])
       @user.update(access_token: auth_params['access_token'], refresh_token: auth_params['refresh_token'])
 
       redirect_to 'http://localhost:3001/'
@@ -30,16 +31,17 @@ class Api::V1::UsersController < ApplicationController
   end
 
   protected
-  def auth_credentials
-      body = {
-        grant_type: 'authorization_code',
-        code: params[:code],
-        redirect_uri: ENV['REDIRECT_URI'],
-        client_id: ENV['CLIENT_ID'],
-        client_secret: ENV['CLIENT_SECRET']
-      }
 
-      RestClient.post('https://accounts.spotify.com/api/token', body)
+  def auth_credentials
+    body = {
+      grant_type: 'authorization_code',
+      code: params[:code],
+      redirect_uri: ENV['REDIRECT_URI'],
+      client_id: ENV['CLIENT_ID'],
+      client_secret: ENV['CLIENT_SECRET']
+    }
+
+    RestClient.post('https://accounts.spotify.com/api/token', body)
   end
 
   def user_credentials(auth_params)

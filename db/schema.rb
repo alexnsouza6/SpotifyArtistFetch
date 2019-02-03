@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,43 +12,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_013316) do
-
+ActiveRecord::Schema.define(version: 20_190_203_013_316) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "artists", force: :cascade do |t|
-    t.string "name"
-    t.string "genre"
-    t.string "href"
-    t.integer "popularity"
-    t.string "uri"
-    t.string "images"
-    t.string "spotify_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'artists', force: :cascade do |t|
+    t.string 'name'
+    t.string 'genre'
+    t.string 'href'
+    t.integer 'popularity'
+    t.string 'uri'
+    t.string 'images'
+    t.string 'spotify_url'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "follows", force: :cascade do |t|
-    t.bigint "artist_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_id"], name: "index_follows_on_artist_id"
-    t.index ["user_id"], name: "index_follows_on_user_id"
+  create_table 'follows', force: :cascade do |t|
+    t.bigint 'artist_id'
+    t.bigint 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['artist_id'], name: 'index_follows_on_artist_id'
+    t.index ['user_id'], name: 'index_follows_on_user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "spotify_url"
-    t.string "href"
-    t.string "uri"
-    t.string "access_token"
-    t.string "refresh_token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'users', force: :cascade do |t|
+    t.string 'username'
+    t.string 'spotify_url'
+    t.string 'href'
+    t.string 'uri'
+    t.string 'access_token'
+    t.string 'refresh_token'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  add_foreign_key "follows", "artists"
-  add_foreign_key "follows", "users"
+  add_foreign_key 'follows', 'artists'
+  add_foreign_key 'follows', 'users'
 end
