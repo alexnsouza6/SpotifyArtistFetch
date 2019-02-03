@@ -7,15 +7,19 @@ class Api::V1::ArtistsController < ApplicationController
       Authorization: "Bearer #{user.access_token}"
     }
 
+    puts '#####################'
+    puts user.access_token
+    puts '#####################'
+
     artists_response = RestClient.get('https://api.spotify.com/v1/me/following?type=artist', header)
 
+    puts '#####################'
+    puts artists_response
+    puts '#####################'
+    
     artists_params = JSON.parse(artists_response)
 
     @artists = artists_params['artists']['items']
-
-    puts '##########################'
-    puts @artists
-    puts '##########################'
 
     create_artists(@artists, user)
 
