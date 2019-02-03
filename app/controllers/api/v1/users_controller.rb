@@ -16,7 +16,7 @@ class Api::V1::UsersController < ApplicationController
                                     )
       @user.update(access_token: auth_params['access_token'], refresh_token: auth_params['refresh_token'])
 
-      redirect_to 'http://localhost:3000/'
+      redirect_to 'https://spotify-your-artists.herokuapp.com'
     end
   end
 
