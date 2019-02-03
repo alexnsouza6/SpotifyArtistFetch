@@ -1,6 +1,6 @@
 class Api::V1::ArtistsController < ApplicationController
   def fetch
-    @user = User.find_by(username: params[:name])
+    @user = User.find_by(username: artists_params['name'])
     header = {
       Authorization: "Bearer #{@user.access_token}"
     }
@@ -28,5 +28,10 @@ class Api::V1::ArtistsController < ApplicationController
       artist.users << user
       artist.save
     end
+  end
+
+  protected
+  def artists_params
+    params.permit(:name)
   end
 end
