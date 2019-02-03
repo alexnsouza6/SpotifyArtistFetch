@@ -3,9 +3,6 @@
 class Api::V1::ArtistsController < ApplicationController
   def fetch
     user = User.find_by(username: artists_params['name'])
-    puts '############################'
-    puts user
-    puts '############################'
     header = {
       Authorization: "Bearer #{user.access_token}"
     }
@@ -15,6 +12,10 @@ class Api::V1::ArtistsController < ApplicationController
     artists_params = JSON.parse(artists_response)
 
     @artists = artists_params['artists']['items']
+
+    puts '##########################'
+    puts @artists
+    puts '##########################'
 
     create_artists(@artists, user)
 
