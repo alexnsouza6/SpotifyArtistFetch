@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get 'login', to: 'login#create'
       get 'callback', to: 'users#create'
       get 'user', to: 'users#fetch_user'
+      get 'artists', to: 'artists#fetch'
     end
   end
 end
