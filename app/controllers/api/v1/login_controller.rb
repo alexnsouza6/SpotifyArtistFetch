@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::LoginController < ApplicationController
   def create
     query_params = {

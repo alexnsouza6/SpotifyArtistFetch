@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -36,17 +38,18 @@ gem 'rack-cors'
 gem 'httparty'
 
 group :development, :test do
+  # Factory Bot ♥ Rails
+  gem 'factory_bot_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # RSpec for Rails-3+
   gem 'rspec-rails', '~> 3.8'
   gem 'shoulda-matchers', '~> 3.0', require: false
   # Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests.
   gem 'vcr', '~> 3.0', '>= 3.0.3'
   # WebMock allows stubbing HTTP requests and setting expectations on HTTP requests.
-  gem 'webmock', '~> 2.1'
-  # 
   gem 'rails-controller-testing'
+  gem 'webmock', '~> 2.1'
 end
 
 group :development do
@@ -54,8 +57,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # A Ruby static code analyzer and formatter, based on the community Ruby style guide.
+  gem 'rubocop', '~> 0.63.1', require: false
 end
 
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
