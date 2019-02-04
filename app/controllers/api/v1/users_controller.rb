@@ -1,16 +1,19 @@
 # frozen_string_literal: true
 
+# UsersController handles user creation, using its credentials to access Spotify API
 class Api::V1::UsersController < ApplicationController
   def create
     if params[:error]
       render json: { error: params[:error] }, status: 422
     else
+      # Parse all responses
       auth_params = JSON.parse(auth_credentials.body)
 
       user_response = user_credentials(auth_params)
 
       user_params = JSON.parse(user_response.body)
 
+      # Find or create an user using response data
       @user = User.find_or_create_by(username: user_params['display_name'],
                                      spotify_url: user_params['external_urls']['spotify'],
                                      href: user_params['href'],
@@ -22,6 +25,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def fetch_user
+    # fetch_user fetches a user and renders it inside a json file
     @user = User.first
     if @user
       render json: @user, status: 200
@@ -33,6 +37,7 @@ class Api::V1::UsersController < ApplicationController
   protected
 
   def auth_credentials
+    # Assembles Auth credentials to prepare Spotify API for other requests
     body = {
       grant_type: 'authorization_code',
       code: params[:code],
@@ -45,6 +50,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_credentials(auth_params)
+    # Assembles the request to Spotify /me API URL
     header = {
       Authorization: "Bearer #{auth_params['access_token']}"
     }
