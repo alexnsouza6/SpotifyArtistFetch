@@ -26,7 +26,7 @@ class Api::V1::UsersController < ApplicationController
 
   def fetch_user
     # fetch_user fetches a user and renders it inside a json file
-    @user = User.first
+    @user = User.last
     if @user
       render json: @user, status: 200
     else
